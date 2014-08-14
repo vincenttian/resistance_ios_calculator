@@ -7,7 +7,7 @@
 //
 
 #import "MasterViewController.h"
-#import "DetailViewController.h"
+#import "DetailTableViewController.h"
 
 @interface MasterViewController ()
 
@@ -27,11 +27,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.navigationItem.leftBarButtonItem = addButton;
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneWithView:)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    self.navigationItem.rightBarButtonItem.enabled = false;
+    
+    self.detailViewController = (DetailTableViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 70)];
+    
+    self.headerTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 40, 300, 40)];
+    [self.headerTextField setBackgroundColor:[UIColor lightGrayColor]];
+    [self.headerTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [headerView addSubview:self.headerTextField];
+    
+    UITextView *text = [[UITextView alloc] initWithFrame:CGRectMake(10, 5, 305, 45)];
+    text.text = @"Add the names of your players below! You need at least 5 and can have at most 10";
+    text.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:text];
+    
+    self.tableView.tableHeaderView = headerView;
+    self.headerTextField.delegate = self;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,22 +65,42 @@
     if (!self.objects) {
         self.objects = [[NSMutableArray alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
+    if (self.headerTextField.text.length == 0) {
+        return;
+    }
+    [self.objects insertObject:[self.headerTextField text] atIndex:0];
+    [self.headerTextField setText:@""];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if ([self.objects count] >= 5) {
+        self.navigationItem.rightBarButtonItem.enabled = true;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = false;
+    }
+    if ([self.objects count] >= 10) {
+        self.navigationItem.leftBarButtonItem.enabled = false;
+        self.headerTextField.enabled = false;
+    }
+}
+
+- (void)doneWithView:(id)sender {
+    DetailTableViewController *detailView = (DetailTableViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
+    detailView.namesArray = self.objects;
+    [self.navigationController pushViewController:detailView animated:YES];
 }
 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
-        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-        controller.navigationItem.leftItemsSupplementBackButton = YES;
-    }
+    
+}
+
+#pragma mark - Text Field delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self insertNewObject:nil];
+    return YES;
 }
 
 #pragma mark - Table View
@@ -80,7 +122,6 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
@@ -88,6 +129,17 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.objects removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        self.navigationItem.leftBarButtonItem.enabled = true;
+        self.headerTextField.enabled = true;
+        if ([self.objects count] >= 5) {
+            self.navigationItem.rightBarButtonItem.enabled = true;
+        } else {
+            self.navigationItem.rightBarButtonItem.enabled = false;
+        }
+        if ([self.objects count] >= 10) {
+            self.navigationItem.leftBarButtonItem.enabled = false;
+            self.headerTextField.enabled = false;
+        }
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }

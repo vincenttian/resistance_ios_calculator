@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87EB1398199D26E80047301B /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EB1397199D26E80047301B /* DetailTableViewController.m */; };
 		87FB8815199AC20C001DCA8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FB8814199AC20C001DCA8A /* main.m */; };
 		87FB8818199AC20C001DCA8A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FB8817199AC20C001DCA8A /* AppDelegate.m */; };
 		87FB881B199AC20C001DCA8A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FB881A199AC20C001DCA8A /* MasterViewController.m */; };
-		87FB881E199AC20C001DCA8A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FB881D199AC20C001DCA8A /* DetailViewController.m */; };
 		87FB8821199AC20C001DCA8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87FB881F199AC20C001DCA8A /* Main.storyboard */; };
 		87FB8823199AC20C001DCA8A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87FB8822199AC20C001DCA8A /* Images.xcassets */; };
 		87FB882F199AC20C001DCA8A /* resistanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FB882E199AC20C001DCA8A /* resistanceTests.m */; };
@@ -27,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		87EB1396199D26E80047301B /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		87EB1397199D26E80047301B /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		87FB880F199AC20C001DCA8A /* resistance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = resistance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87FB8813199AC20C001DCA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87FB8814199AC20C001DCA8A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -34,8 +36,6 @@
 		87FB8817199AC20C001DCA8A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		87FB8819199AC20C001DCA8A /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		87FB881A199AC20C001DCA8A /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		87FB881C199AC20C001DCA8A /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		87FB881D199AC20C001DCA8A /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		87FB8820199AC20C001DCA8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87FB8822199AC20C001DCA8A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		87FB8828199AC20C001DCA8A /* resistanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = resistanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,8 +86,8 @@
 				87FB8817199AC20C001DCA8A /* AppDelegate.m */,
 				87FB8819199AC20C001DCA8A /* MasterViewController.h */,
 				87FB881A199AC20C001DCA8A /* MasterViewController.m */,
-				87FB881C199AC20C001DCA8A /* DetailViewController.h */,
-				87FB881D199AC20C001DCA8A /* DetailViewController.m */,
+				87EB1396199D26E80047301B /* DetailTableViewController.h */,
+				87EB1397199D26E80047301B /* DetailTableViewController.m */,
 				87FB881F199AC20C001DCA8A /* Main.storyboard */,
 				87FB8822199AC20C001DCA8A /* Images.xcassets */,
 				87FB8812199AC20C001DCA8A /* Supporting Files */,
@@ -220,10 +220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87EB1398199D26E80047301B /* DetailTableViewController.m in Sources */,
 				87FB8818199AC20C001DCA8A /* AppDelegate.m in Sources */,
 				87FB881B199AC20C001DCA8A /* MasterViewController.m in Sources */,
 				87FB8815199AC20C001DCA8A /* main.m in Sources */,
-				87FB881E199AC20C001DCA8A /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +410,7 @@
 				87FB8834199AC20C001DCA8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		87FB8835199AC20C001DCA8A /* Build configuration list for PBXNativeTarget "resistanceTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +419,7 @@
 				87FB8837199AC20C001DCA8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class DetailViewController;
+@class DetailTableViewController;
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UITableViewController <UITextFieldDelegate>
 
-@property (strong, nonatomic) DetailViewController *detailViewController;
+@property (strong, nonatomic) DetailTableViewController *detailViewController;
+
+@property UITextField *headerTextField;
 
 
 @end
